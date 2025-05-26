@@ -8,8 +8,7 @@ import nltk
 from word2number import w2n
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import argostranslate.package
-import argostranslate.translate
+from deep_translator import GoogleTranslator
 from transformers import pipeline
 import openai
 
@@ -68,23 +67,17 @@ nltk.download('words')
 nlp = spacy.load("en_core_web_sm")
 zero_shot_classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
 
-# Argos Translate setup
-packages = argostranslate.package.get_available_packages()
-installed_languages = argostranslate.translate.get_installed_languages()
-if not any(lang.code == "ar" for lang in installed_languages):
-    for pkg in packages:
-        if pkg.from_code == "ar" and pkg.to_code == "en":
-            download_path = pkg.download()
-            argostranslate.package.install_from_path(download_path)
-            break
-installed_languages = argostranslate.translate.get_installed_languages()
-ar_lang = next(filter(lambda x: x.code == "ar", installed_languages))
-en_lang = next(filter(lambda x: x.code == "en", installed_languages))
-translation_en = ar_lang.get_translation(en_lang)
-translation_ar = en_lang.get_translation(ar_lang)
-
 def translate_to_english(text):
-    return translation_en.translate(text)
+    try:
+        return GoogleTranslator(source='auto', target='en').translate(text)
+    except Exception as e:
+        return f"Translation error: {e}"
+
+def translate_to_arabic(text):
+    try:
+        return GoogleTranslator(source='auto', target='ar').translate(text)
+    except Exception as e:
+        return f"Translation error: {e}"
 
 def cardinal_ner(text):
     translated = translate_to_english(text)
