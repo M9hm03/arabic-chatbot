@@ -1,0 +1,9 @@
+streamlit
+pandas
+scikit-learn
+nltk
+spacy
+argostranslate
+openai
+transformers
+word2number
