@@ -1,0 +1,18 @@
+Category,Group,Total,Smokers
+Gender,Male,726,187
+Gender,Female,965,234
+Education,Quit_Studing,586,137
+Education,Degree,262,39
+Education,Basic,410,143
+Education,Non-Degree,433,102
+Age_Group,Young_Adult,443,143
+Age_Group,Middle_Aged,547,152
+Age_Group,Senior,556,72
+Age_Group,Youth,145,54
+Income,Very Low,498,121
+Income,High,168,24
+Income,Low,664,190
+Income,Medium,361,86
+Marital_Status,Lost_Partner,452,120
+Marital_Status,Single,427,158
+Marital_Status,Married,812,143
